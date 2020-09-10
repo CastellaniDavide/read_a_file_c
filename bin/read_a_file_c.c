@@ -14,9 +14,28 @@
  *
  */
 #include <stdio.h>
+#include <stdlib.h>
 
-int main() {
-	// printf() displays the string inside quotation
-	printf("read_a_file_c");
+int main()
+{
+	FILE *mdPtr;
+	char *line = (char *)malloc(sizeof(char) * 1000);
+	size_t len = 0;
+	size_t read;
+
+	if ((mdPtr = fopen("./../docs/README.md", "r")) == NULL)
+	{
+		puts("Error reading the file");
+	}
+	else
+	{
+		while ((read = getline(&line, &len, mdPtr)) != -1)
+		{
+			printf("%s\n", line);
+		}
+	}
+
+	fclose(mdPtr);
+
 	return 0;
 }
